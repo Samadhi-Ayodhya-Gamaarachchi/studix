@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Tasks from "./pages/Tasks";
+import Profile from "./pages/Profile";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
 const PrivateRoute = ({ children }: { children: React.ReactElement }) => {
@@ -26,6 +28,8 @@ function App() {
 
           {/* Private */}
           <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/tasks" element={<PrivateRoute><Tasks /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         </Routes>
       </Router>
     </AuthProvider>
