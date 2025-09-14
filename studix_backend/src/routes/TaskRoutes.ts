@@ -29,6 +29,17 @@ router.put("/:id", auth, async (req: AuthRequest, res) => {
   res.json(updated);
 });
 
+// PATCH /api/tasks/:id (for partial updates like toggling completion)
+router.patch("/:id", auth, async (req: AuthRequest, res) => {
+  const updated = await Task.findOneAndUpdate(
+    { _id: req.params.id, user: (req.user as any).id },
+    req.body,
+    { new: true }
+  );
+  if (!updated) return res.status(404).json({ message: "Task not found" });
+  res.json(updated);
+});
+
 // DELETE /api/tasks/:id
 router.delete("/:id", auth, async (req: AuthRequest, res) => {
   const deleted = await Task.findOneAndDelete({ _id: req.params.id, user: (req.user as any).id });
