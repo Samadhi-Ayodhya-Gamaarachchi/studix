@@ -38,7 +38,7 @@ const Dashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("authToken");
       const res = await axios.get("http://localhost:5000/api/tasks", {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -98,7 +98,7 @@ const Dashboard = () => {
 
   const toggleTask = async (taskId: string, completed: boolean) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("authToken");
       await axios.patch(
         `http://localhost:5000/api/tasks/${taskId}`,
         { completed: !completed },

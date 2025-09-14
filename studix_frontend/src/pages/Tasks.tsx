@@ -26,7 +26,7 @@ const Tasks = () => {
   const fetchTasks = async () => {
     setIsLoading(true);
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("authToken");
       const res = await axios.get("http://localhost:5000/api/tasks", {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -42,7 +42,7 @@ const Tasks = () => {
     if (!title.trim()) return;
     
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("authToken");
       await axios.post(
         "http://localhost:5000/api/tasks",
         { title, description, priority, dueDate },
@@ -61,7 +61,7 @@ const Tasks = () => {
 
   const toggleTask = async (taskId: string, completed: boolean) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("authToken");
       await axios.patch(
         `http://localhost:5000/api/tasks/${taskId}`,
         { completed: !completed },
@@ -77,7 +77,7 @@ const Tasks = () => {
     if (!window.confirm("Are you sure you want to delete this task?")) return;
     
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("authToken");
       await axios.delete(`http://localhost:5000/api/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });

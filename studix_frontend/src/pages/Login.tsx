@@ -40,12 +40,13 @@ const Login = () => {
       });
       
       // Store token and user data
-      localStorage.setItem("token", res.data.token);
+      const token = res.data.token;
+      localStorage.setItem("authToken", token);
       if (res.data.user) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
       }
       
-      login();
+      login(token);
       navigate("/dashboard");
     } catch (err: any) {
       setError(
